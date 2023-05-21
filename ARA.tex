@@ -1,6 +1,8 @@
 \RequirePackage[no-math]{fontspec}
+\special{dvipdfmx:config z 0}
 \documentclass[twoside, fontset=fandol, punct=kaiming]{ctexbook}
 \usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
 \ctexset{
     chapter = { 
         name = {章,},
@@ -17,7 +19,7 @@
 \usepackage[scr=boondox]{mathalpha}
 \usepackage{amsmath,amsfonts,amssymb,amsthm,euscript,fontspec,tocloft,fancyhdr,mathtools,enumitem,pgfplots,tikz-cd,xeCJKfntef}
 \usepackage{endnotes}
-\usepackage{tikz-cd}
+
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{fixdif}
@@ -122,17 +124,41 @@
   \theoremstyle{innocent}
   \newtheorem*{theorem}{定理}
 \begin{document}
-\title{高等实分析引论}
-\author{Gerald B. Folland}
-\maketitle
+
+\definecolor{titlegreendark}{HTML}{C1C998}
+\begin{titlepage}
+    \tikzset{help lines/.style=thick}
+    \begin{tikzpicture}[overlay, remember picture]
+        \filldraw[fill = titlegreendark!50!white, line width = 0pt, titlegreendark!50!white] (current page.south west) rectangle +(\paperwidth,\paperheight);
+        \def\rectanglepath#1{\filldraw[fill = titlegreendark, line width = 0pt, titlegreendark, rotate = 45] #1 rectangle +(3,3);}
+        \foreach\i in {-36,-30,...,18}{\foreach\j in {-36,-30,...,18}{\rectanglepath{(\i,\j)}\rectanglepath{(\i+3,\j+3)}}}
+        \draw[help lines, step=.3cm, opacity = .02] (-30,-30) grid (30,30);
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture, opacity = .1]
+        \foreach \x in {1,...,500}{
+                \pgfmathrandominteger{\a}{-1000}{500}
+                \pgfmathrandominteger{\b}{-1000}{500}
+                \pgfpathcircle{\pgfpoint{+\a pt}{+\b pt}}{+3pt}
+                \color{titlegreendark!70!black}
+                \pgfusepath{fill}
+            }
+        \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[opacity = .2] at ([xshift = .5\paperwidth, yshift = -.5\paperheight]current page.north west){
+            \includegraphics[width=\paperwidth]{title-bg.png}
+        };
+        \filldraw [fill = white, opacity = .8, thick] ([xshift = .2\paperwidth, yshift = -.25\paperheight]current page.north west) rectangle ([xshift = -.2\paperwidth, yshift = -.5\paperheight]current page.north east);
+        \node at ([xshift = .5\paperwidth, yshift = -.375\paperheight]current page.north west) {\Huge\bfseries \parbox[c]{10em}{\centering 高等实分析引论\\ \bigskip\sffamily\large Gerald B. Folland~~著\\ 小飞舞~~译}};
+    \end{tikzpicture}
+\end{titlepage}
 \chapter*{前言}
 ``实分析''一词首先是指实单变量或多变量函数的经典理论: 极限, 连续性, 微分, Riemann 积分, 无穷级数等相关主题. 然而, 时至今日, 其包含了一些更抽象的理论, 这些理论将实变函数论的思想扩展到更普遍的情形, 又为某些具体的``经典''问题带来了新的启示. 这个更高等的部分是本书的主题.
 
-故本书的受众是那些已通晓经典实变函数论的人. (关于这些主题有很多书, 古老的经典是Rudin[16], 最近最有吸引力的是K\"orner[10]. 此外, 由Steven Krantz编写的《MAA指南》[11]与这本指南同时出现）. 根据MAA指南的理念, 我的目的是用简明的文章对该主题进行说明, 为入门者提供概述, 为已学习过者提供复习. 基本定义, 主要定理和证明的关键思想都包括在内, 而不含技术细节. 因此, 书中大多数正式陈述的结果后面都有证明的草图, 其完整程度差别很大. 很少或没有提供证明的结果分为两类, 用``命题''和``定理''的命名以区分之. ``命题''的证明是很容易的, 读者应它作为练习. 若称其为定理, 则意味着其证明较为冗长且不易删减.
+故本书的受众是那些已通晓经典实变函数论的人. (关于这些主题有很多书, 古老的经典是\cite{rudin1976principles}, 最近最引人入胜者为\cite{korner2004companion}. 此外, 亦有 Steven Krantz 所著之\,《\,MAA\,导论\,》\,\cite{krantz2014guide}与本书同时问世）. 根据MAA导论的理念, 我的目的是用简明的文章对该主题进行说明, 为入门者提供概述, 为已学习过者提供复习. 基本定义, 主要定理和证明的关键思想都包括在内, 而不含技术细节. 因此, 书中大多数正式陈述的结果后面都有证明的草图, 其完整程度差别很大. 很少或没有提供证明的结果分为两类, 用``命题''和``定理''的命名以区分之. ``命题''的证明是很容易的, 读者应它作为练习. 若称其为定理, 则意味着其证明较为冗长且不易删减.
 
-自然, 只有在读者有资源来填补空缺时, 这种介绍才有效. 我把我自己的书[6]作为内容远比本书丰富的标准参考, 只因为我对它最熟悉. 本书所示均已在[6]证明, 除了某些明确指明其他来源的结果. 再者, Lang[12], Royden[15]和Rudin[17]亦涵盖大部分相同材料.
+自然, 只有在读者有资源来填补空缺时, 这种介绍才有效. 我把我自己的书\cite{folland1999real}作为内容远比本书丰富的标准参考, 只因为我对它最熟悉. 本书所示均已在\cite{folland1999real}证明, 除了某些明确指明其他来源的结果. 再者, \cite{lang2012real}, \cite{royden1988real}和\cite{rudin1987realcomplex}亦涵盖大部分相同材料.
 
-然而, 本书并非[6]的简写. 教科书作者的一个主要问题是办法若干相互联系的材料线性叙出, 如同小说家或历史学家一般, 且解决方案并非唯一. 我利用MAA指南所提供的机会, 以一种与[6]中完全不同的方式来安排这些主题. 这两本书的读者也许会通过比较这两者得到一些见解.
+然而, 本书并非\cite{folland1999real}的简写. 教科书作者的一个主要问题是办法若干相互联系的材料线性叙出, 如同小说家或历史学家一般, 且解决方案并非唯一. 我利用MAA导论所提供的机会, 以一种与\cite{folland1999real}中完全不同的方式来安排这些主题. 这两本书的读者也许会通过比较这两者得到一些见解.
 
 
 \chapter{引论: 记号, 术语和集合论}
@@ -246,4 +272,8 @@ Zorn 引理蕴含选择公理. (考虑从 $A$ 的子集射往 $\bigcup_{\alpha\i
     \item $X=\mathbb R^3~\textit{中单位球}$; $\rho (x,y) = \text{$x$ 至 $y$ 的大圆距离}$.
     \item $X=\mathbb R^n~\textit{中光滑曲线}$; $\rho (x,y) = \text{$x$ 至 $y$ 对应曲线长度}$. (即, $X$ 是一一 $C^{(1)}$ 映射 $\phi :(a,b)\to \mathbb R^n$ 之像, 使 $x=\phi (s)$, $y=\phi (t)$, 则 $\rho (x,y)=\int_s^t|\psi '|$.)
 \end{itemize}
+
+
+\bibliographystyle{alpha}
+\bibliography{cite}
 \end{document}

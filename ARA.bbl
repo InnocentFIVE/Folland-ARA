@@ -1,0 +1,40 @@
+\begin{thebibliography}{Rud87}
+
+\bibitem[Fol99]{folland1999real}
+Gerald~B Folland.
+\newblock {\em Real analysis: modern techniques and their applications},
+  volume~40.
+\newblock {John Wiley \& Sons}, 1999.
+
+\bibitem[K{\"o}r04]{korner2004companion}
+Thomas~William K{\"o}rner.
+\newblock {\em A companion to analysis: a second first and first second course
+  in analysis}, volume~62.
+\newblock American Mathematical Soc., 2004.
+
+\bibitem[Kra14]{krantz2014guide}
+Steven~G Krantz.
+\newblock {\em A guide to real variables}.
+\newblock Number~38. American Mathematical Soc., 2014.
+
+\bibitem[Lan12]{lang2012real}
+Serge Lang.
+\newblock {\em Real and functional analysis}, volume 142.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem[RF88]{royden1988real}
+Halsey~Lawrence Royden and Patrick Fitzpatrick.
+\newblock {\em Real analysis}, volume~32.
+\newblock Macmillan New York, 1988.
+
+\bibitem[Rud76]{rudin1976principles}
+Walter Rudin.
+\newblock {\em Principles of mathematical analysis}, volume~3.
+\newblock McGraw-hill New York, 1976.
+
+\bibitem[Rud87]{rudin1987realcomplex}
+Walter Rudin.
+\newblock {\em Real and Complex Analysis}.
+\newblock McGraw-hill New York, 1987.
+
+\end{thebibliography}
